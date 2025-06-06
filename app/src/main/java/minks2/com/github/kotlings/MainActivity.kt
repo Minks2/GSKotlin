@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import minks2.com.github.kotlings.adapter.EventoExtremoAdapter
 import minks2.com.github.kotlings.data.EventoExtremo
 
+import android.text.Editable
+import android.text.TextWatcher
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var editTextNomeLocal: EditText
@@ -39,6 +42,49 @@ class MainActivity : AppCompatActivity() {
         buttonIncluir = findViewById(R.id.buttonIncluir)
         recyclerViewEventos = findViewById(R.id.recyclerViewEventos)
         buttonIdentificacao = findViewById(R.id.buttonIdentificacao)
+
+        editTextDataEvento.addTextChangedListener(object : TextWatcher {
+            private var current = ""
+            private val ddmmyyyy = "DDMMYYYY"
+            private val divider = '/'
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s.toString() != current) {
+                    var clean = s.toString().replace("[^\\d.]".toRegex(), "")
+
+                    var formatted = ""
+                    if (clean.length > 0) {
+                        if (clean.length <= 2) {
+                            formatted = clean
+                        } else if (clean.length <= 4) {
+                            formatted = clean.substring(0, 2) + divider + clean.substring(2)
+                        } else if (clean.length <= 8) { // DDMMYYYY
+                            formatted = clean.substring(0, 2) + divider + clean.substring(2, 4) + divider + clean.substring(4)
+                        } else {
+                            // Se digitou mais de 8 dígitos, limita ao máximo de 8
+                            formatted = clean.substring(0, 2) + divider + clean.substring(2, 4) + divider + clean.substring(4, 8)
+                        }
+                    }
+
+                    // Garante que o comprimento total seja no máximo 10 (DD/MM/YYYY)
+                    if (formatted.length > 10) {
+                        formatted = formatted.substring(0, 10)
+                    }
+
+                    current = formatted
+
+                    editTextDataEvento.setText(current)
+                    editTextDataEvento.setSelection(current.length)
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+
 
         // Configura o RecyclerView
         eventoExtremoAdapter = EventoExtremoAdapter(listaEventos) { evento ->
