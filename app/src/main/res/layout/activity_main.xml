@@ -1,84 +1,127 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".MainActivity">
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Monitoramento Climático Extremo"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"/>
-
-    <EditText
-        android:id="@+id/editTextNomeLocal"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nome do local (cidade/bairro)"
-        android:inputType="textCapSentences"
-        android:minHeight="48dp" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editTextTipoEvento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Tipo do evento (chuva intensa, seca, etc.)"
-        android:inputType="textCapSentences"
-        android:minHeight="48dp" />
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:text="@string/main_title"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceHeadline5" />
 
-    <EditText
-        android:id="@+id/editTextGrauImpacto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Grau de impacto (leve, moderado, severo)"
-        android:inputType="textCapSentences"
-        android:minHeight="48dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-    <EditText
-        android:id="@+id/editTextDataEvento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Data do evento (DD/MM/AAAA)"
-        android:inputType="date"
-        android:minHeight="48dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextNomeLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_local"
+                android:inputType="textCapWords"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/editTextPessoasAfetadas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Número estimado de pessoas afetadas"
-        android:inputType="number"
-        android:minHeight="48dp" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-    <Button
-        android:id="@+id/buttonIncluir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Incluir"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextTipoEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_tipo_evento"
+                android:inputType="textCapSentences"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/buttonIdentificacao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sobre o Projeto"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewEventos"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_evento_extremo"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextGrauImpacto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_grau_impacto"
+                android:inputType="textCapSentences"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:startIconDrawable="@android:drawable/ic_menu_my_calendar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextDataEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_data_evento"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPessoasAfetadas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_pessoas_afetadas"
+                android:inputType="number"
+                android:minHeight="48dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/buttonIncluir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/button_incluir" />
+
+        <Button
+            android:id="@+id/buttonIdentificacao"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="12dp"
+            android:text="@string/button_sobre" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewEventos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_evento_extremo" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

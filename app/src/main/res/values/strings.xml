@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">kotlinGs</string>
+    <string name="app_name">Monitoramento Climático</string>
+
+    <string name="main_title">Monitoramento Climático Extremo</string>
+    <string name="hint_local">Nome do local (cidade/bairro)</string>
+    <string name="hint_tipo_evento">Tipo do evento (chuva intensa, seca, etc.)</string>
+    <string name="hint_grau_impacto">Grau de impacto (leve, moderado, severo)</string>
+    <string name="hint_data_evento">Data do evento</string>
+    <string name="hint_pessoas_afetadas">Número estimado de pessoas afetadas</string>
+    <string name="button_incluir">Incluir Evento</string>
+    <string name="button_sobre">Sobre o Projeto</string>
 </resources>

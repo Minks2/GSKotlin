@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import minks2.com.github.kotlings.R
 import minks2.com.github.kotlings.data.EventoExtremo
@@ -24,8 +25,8 @@ class EventoExtremoAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventoExtremoViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_evento_extremo, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_evento_extremo, parent, false)
         return EventoExtremoViewHolder(view)
     }
 
@@ -38,7 +39,16 @@ class EventoExtremoAdapter(
         holder.textViewPessoasAfetadas.text = "Pessoas Afetadas: ${evento.pessoasAfetadas}"
 
         holder.buttonExcluirItem.setOnClickListener {
-            onDeleteClickListener(evento)
+            // Cria um AlertDialog para confirmação
+            AlertDialog.Builder(holder.itemView.context).setTitle("Confirmar Exclusão")
+                .setMessage("Tem certeza de que deseja excluir o evento em '${evento.nomeLocal}'?")
+
+                .setPositiveButton("Sim") { dialog, which ->
+                    // Se o usuário clicar "Sim", então executa a exclusão
+                    onDeleteClickListener(evento)
+                }
+                // O botão "Não" não faz nada, apenas fecha o diálogo
+                .setNegativeButton("Não", null).show()
         }
     }
 
@@ -49,6 +59,7 @@ class EventoExtremoAdapter(
         if (position != -1) {
             eventos.removeAt(position)
             notifyItemRemoved(position)
+            notifyItemRangeChanged(position, eventos.size)
         }
     }
 }

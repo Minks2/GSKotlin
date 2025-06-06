@@ -1,33 +1,46 @@
 # Monitoramento Climático Extremo
 
-## Descrição do Projeto
-Este aplicativo Android foi desenvolvido para registrar e monitorar eventos climáticos extremos. Ele permite cadastrar detalhes como o local do evento, seu tipo, o grau de impacto, a data de ocorrência e o número estimado de pessoas afetadas, exibindo-os em uma lista interativa.
+Este aplicativo Android, desenvolvido em Kotlin, permite o registro e monitoramento de eventos climáticos extremos. A interface foi construída seguindo as diretrizes do Material 3, oferecendo uma experiência de usuário moderna e intuitiva.
 
-## Funcionalidades Implementadas
+Projeto desenvolvido para a Global Solution 1 (GS1) da disciplina de Android + Kotlin.
 
-* **Tela Principal:** Contém campos para inserção de dados (Local, Tipo, Impacto, Data, Pessoas Afetadas) e um botão "Incluir" que adiciona o evento ao RecyclerView.
-* **RecyclerView Personalizado:** Cada item da lista exibe todas as informações do evento de forma clara, utilizando um layout customizado.
-* **Exclusão Individual:** Cada item no RecyclerView possui um botão "Excluir" que permite remover eventos específicos da lista.
-* **Validação de Dados:** Impede o cadastro de eventos com campos vazios e garante que o número de pessoas afetadas seja um valor positivo.
-* **Título Criativo:** O aplicativo apresenta um título descritivo no topo da tela principal.
-* **Tela de Identificação:** Uma tela separada exibe o nome e RM dos desenvolvedores do projeto.
+## Funcionalidades Principais
 
-## Evidências de Execução
+* **Cadastro de Eventos:** Formulário completo para inserir detalhes do evento, como local, tipo, impacto, data e número de pessoas afetadas.
+* **Listagem Dinâmica:** Os eventos cadastrados são exibidos em tempo real em uma lista com design moderno, utilizando `RecyclerView` e `CardView`.
+* **Validação de Dados:** O sistema impede o cadastro de eventos com campos vazios e com número de pessoas afetadas inválido (menor ou igual a zero).
+* **Exclusão de Itens:** Cada evento na lista possui uma opção para ser removido individualmente da lista.
+* **Tela de Identificação:** Uma tela dedicada exibe as informações dos desenvolvedores do projeto.
 
-### Tela Principal com Eventos Cadastrados
-![Screenshot da tela principal com eventos](caminho/para/sua/imagem_tela_principal.png)
+## Funcionalidades Bônus e Melhorias
 
-### Validação de Campos (Exemplo: Campo Vazio)
-![Screenshot da validação de campo vazio](caminho/para/sua/imagem_validacao.png)
+Para aprimorar a usabilidade e a qualidade técnica do projeto, foram implementadas as seguintes funcionalidades extras:
 
-### Exclusão de Item
-![Screenshot de item sendo excluído](caminho/para/sua/imagem_exclusao.png)
+* ✅ **UI/UX com Material 3:** O projeto foi totalmente estilizado com componentes do Material 3, incluindo `TextInputLayout` para os campos do formulário e `CardView` para a lista, resultando em um visual limpo e profissional.
+* ✅ **Seletor de Data (DatePicker):** Para melhorar a usabilidade e evitar erros de digitação, a inserção da data é feita através de um `DatePickerDialog` nativo.
+* ✅ **Confirmação de Exclusão:** Para prevenir a remoção acidental de dados, um diálogo de confirmação é exibido antes de excluir um evento.
+
+## Evidências de Execução (Screenshots)
+
+### Tela Principal e Lista de Eventos
+![Tela Principal com lista de eventos](images/WhatsApp%20Image%202025-06-06%20at%2016.21.09.jpeg)
+
+### Tela de Cadastro Limpa
+![Tela de Cadastro](images/WhatsApp%20Image%202025-06-06%20at%2016.21.09%20(2).jpeg)
+
+### Funcionalidade Bônus: Seletor de Data
+![Seletor de Data](images/WhatsApp%20Image%202025-06-06%20at%2016.21.09%20(3).jpeg)
+
+### Funcionalidade Bônus: Confirmação de Exclusão
+![Confirmação de Exclusão](images/WhatsApp%20Image%202025-06-06%20at%2016.21.08.jpeg)
 
 ### Tela de Identificação
-![Screenshot da tela de identificação](caminho/para/sua/imagem_identificacao.png)
+![Tela de Identificação](images/WhatsApp%20Image%202025-06-06%20at%2016.21.09%20(1).jpeg)
 
-## Participantes
+
+## Desenvolvido por
+
 * **Caio Sales Dias** - RM: 552286
-* **Guilherme Bussolan Loureiro** - RM: 552455
+* **Guilherme Bussolan** - RM: 552455
 
 ---

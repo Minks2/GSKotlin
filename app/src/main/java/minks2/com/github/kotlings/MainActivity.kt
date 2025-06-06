@@ -1,6 +1,6 @@
-
 package minks2.com.github.kotlings
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import minks2.com.github.kotlings.adapter.EventoExtremoAdapter
 import minks2.com.github.kotlings.data.EventoExtremo
-
-import android.text.Editable
-import android.text.TextWatcher
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,48 +41,12 @@ class MainActivity : AppCompatActivity() {
         recyclerViewEventos = findViewById(R.id.recyclerViewEventos)
         buttonIdentificacao = findViewById(R.id.buttonIdentificacao)
 
-        editTextDataEvento.addTextChangedListener(object : TextWatcher {
-            private var current = ""
-            private val ddmmyyyy = "DDMMYYYY"
-            private val divider = '/'
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.toString() != current) {
-                    var clean = s.toString().replace("[^\\d.]".toRegex(), "")
-
-                    var formatted = ""
-                    if (clean.length > 0) {
-                        if (clean.length <= 2) {
-                            formatted = clean
-                        } else if (clean.length <= 4) {
-                            formatted = clean.substring(0, 2) + divider + clean.substring(2)
-                        } else if (clean.length <= 8) { // DDMMYYYY
-                            formatted = clean.substring(0, 2) + divider + clean.substring(2, 4) + divider + clean.substring(4)
-                        } else {
-                            // Se digitou mais de 8 dígitos, limita ao máximo de 8
-                            formatted = clean.substring(0, 2) + divider + clean.substring(2, 4) + divider + clean.substring(4, 8)
-                        }
-                    }
-
-                    // Garante que o comprimento total seja no máximo 10 (DD/MM/YYYY)
-                    if (formatted.length > 10) {
-                        formatted = formatted.substring(0, 10)
-                    }
-
-                    current = formatted
-
-                    editTextDataEvento.setText(current)
-                    editTextDataEvento.setSelection(current.length)
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
-
+        // Configura o campo de data para abrir o DatePickerDialog
+        editTextDataEvento.isFocusable = false
+        editTextDataEvento.isClickable = true
+        editTextDataEvento.setOnClickListener {
+            showDatePickerDialog()
+        }
 
         // Configura o RecyclerView
         eventoExtremoAdapter = EventoExtremoAdapter(listaEventos) { evento ->
@@ -106,6 +68,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog =
+            DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+                // O mês retorna de 0-11, então some 1
+                val formattedDate =
+                    String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
+                editTextDataEvento.setText(formattedDate)
+            }, year, month, day)
+
+        datePickerDialog.show()
+    }
+
     private fun incluirEvento() {
         val nomeLocal = editTextNomeLocal.text.toString().trim()
         val tipoEvento = editTextTipoEvento.text.toString().trim()
@@ -120,14 +99,21 @@ class MainActivity : AppCompatActivity() {
 
         val pessoasAfetadas = pessoasAfetadasStr.toIntOrNull()
         if (pessoasAfetadas == null || pessoasAfetadas <= 0) {
-            Toast.makeText(this, "Número de pessoas afetadas deve ser maior que zero.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "Número de pessoas afetadas deve ser maior que zero.",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
-        val novoEvento = EventoExtremo(nomeLocal, tipoEvento, grauImpacto, dataEvento, pessoasAfetadas)
-        listaEventos.add(novoEvento)
-        eventoExtremoAdapter.notifyItemInserted(listaEventos.size - 1)
+        val novoEvento =
+            EventoExtremo(nomeLocal, tipoEvento, grauImpacto, dataEvento, pessoasAfetadas)
+        listaEventos.add(0, novoEvento) // Adiciona no início da lista
+        eventoExtremoAdapter.notifyItemInserted(0)
+        recyclerViewEventos.scrollToPosition(0) // Rola para o topo
 
+        // Limpa os campos
         editTextNomeLocal.text.clear()
         editTextTipoEvento.text.clear()
         editTextGrauImpacto.text.clear()
