@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginBottom="8dp"
+    android:background="#E0E0E0">
+
+    <TextView
+        android:id="@+id/textViewLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Local: Cidade/Bairro"/>
+
+    <TextView
+        android:id="@+id/textViewTipoEvento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Tipo: Chuva Intensa"/>
+
+    <TextView
+        android:id="@+id/textViewGrauImpacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Impacto: Severo"/>
+
+    <TextView
+        android:id="@+id/textViewDataEvento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Data: 01/01/2023"/>
+
+    <TextView
+        android:id="@+id/textViewPessoasAfetadas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Pessoas Afetadas: 1000"/>
+
+    <Button
+        android:id="@+id/buttonExcluirItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="8dp"
+        android:text="Excluir"
+        android:backgroundTint="#FF0000"/>
+
+</LinearLayout>
